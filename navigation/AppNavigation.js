@@ -8,7 +8,7 @@ import Login from '../screens/Auth/Login';
 import Signup from '../screens/Auth/Signup';
 import Dashboard from '../screens/Dashboard/Dashboard';
 import SplashScreen from '../screens/SplashScreen/SplashScreen';
-
+import OTPScreen from '../screens/Auth/OTPScreen';
 const Stack = createNativeStackNavigator();
 
 const AppNavigation = () => {
@@ -38,6 +38,7 @@ const AppNavigation = () => {
           // Unauthenticated routes
           <>
             <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="OTP" component={OTPScreen} />
             <Stack.Screen name="SignUp" component={Signup} />
           </>
         )}

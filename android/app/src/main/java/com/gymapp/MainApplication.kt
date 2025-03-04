@@ -1,4 +1,4 @@
-package com.gymapp
+package com.gymshapes
 
 import android.app.Application
 import com.facebook.react.PackageList

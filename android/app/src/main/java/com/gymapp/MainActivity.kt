@@ -1,4 +1,4 @@
-package com.gymapp
+package com.gymshapes
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

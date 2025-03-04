@@ -39,12 +39,12 @@ import styles from './Dashboard.styles';
     const [currentDate, setCurrentDate] = useState('');
     const [isHovered, setIsHovered] = useState(false);
     const dispatch = useDispatch();
-
+    const [userName,setUserName]=useState('')
     useEffect(() => {
       const date = new Date();
       const formattedDate = date.toLocaleDateString('en-US', {
         year: 'numeric',
-        month: 'short',
+        month: 'long',
         day: 'numeric',
       });
       setCurrentDate(formattedDate);
@@ -104,7 +104,8 @@ import styles from './Dashboard.styles';
         try {
           const response = await axiosInstance.get('/attendance/status');
           // successMessage(response.data.canMark)
-          console.log(response.data);
+          console.log("Sata is",response.data.user.name);
+          setUserName(response.data.user.name)  
           if (!response.data.canMark) {
             setSuccessMessage(true);
             setTimeStamp(response.data.markedAt);
@@ -195,12 +196,7 @@ import styles from './Dashboard.styles';
                 <View style={styles.dateContainer}>
                   <Text style={styles.date}>{currentDate}</Text>
                 </View>
-                <TouchableOpacity
-                  style={styles.logoutButton}
-                  onPress={handleLogout}>
-                  <MaterialIcon name="logout" size={20} color="#ff9900" />
-                  <Text style={styles.logoutText}>Logout</Text>
-                </TouchableOpacity>
+               
               </View>
             </View>
 
@@ -212,7 +208,7 @@ import styles from './Dashboard.styles';
                 />
               </View>
               <View style={styles.greetingContainer}>
-                <Text style={styles.greeting}>Hello, Usman!</Text>
+                <Text style={styles.greeting}>Hello, {userName}!</Text>
                 <Text style={styles.motivation}>Ready to start workout?</Text>
               </View>
             </View>

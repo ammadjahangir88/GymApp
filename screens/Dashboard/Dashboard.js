@@ -67,27 +67,32 @@ import styles from './Dashboard.styles';
     const [isCameraVisible, setIsCameraVisible] = useState(false);
 
     const requestCameraPermission = async () => {
-      try {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.CAMERA,
-          {
-            title: 'Camera Permission',
-            message: 'This app needs access to your camera to scan QR codes.',
-            buttonNeutral: 'Ask Me Later',
-            buttonNegative: 'Cancel',
-            buttonPositive: 'OK',
-          },
-        );
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          setIsCameraVisible(true);
-        } else {
-          Alert.alert(
-            'Permission Denied',
-            'Camera permission is required to scan QR codes.',
+     
+      if (Platform.OS === 'android') {
+        try {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.CAMERA,
+            {
+              title: 'Camera Permission',
+              message: 'This app needs access to your camera to scan QR codes.',
+              buttonNeutral: 'Ask Me Later',
+              buttonNegative: 'Cancel',
+              buttonPositive: 'OK',
+            },
           );
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            setIsCameraVisible(true);
+          } else {
+            Alert.alert(
+              'Permission Denied',
+              'Camera permission is required to scan QR codes.',
+            );
+          }
+        } catch (err) {
+          console.warn(err);
         }
-      } catch (err) {
-        console.warn(err);
+      } else {
+        setIsCameraVisible(true);
       }
     };
 

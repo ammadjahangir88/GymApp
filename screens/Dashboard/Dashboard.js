@@ -14,7 +14,7 @@
     Modal,
     Pressable,
   } from 'react-native';
-  import {Camera} from 'react-native-camera-kit';
+  import {Camera, CameraType} from 'react-native-camera-kit';
   import axiosInstance from '../../axios/Axios';
   import {useDispatch, useSelector} from 'react-redux';
   import {LOGOUT, selectUserId} from '../../redux/authSlice';
@@ -247,6 +247,7 @@ import styles from './Dashboard.styles';
             {isCameraVisible && (
               <View style={styles.cameraContainer}>
                 <Camera
+                cameraType={CameraType.Back}
                   style={styles.camera}
                   scanBarcode={true}
                   onReadCode={handleBarcodeRead}
